@@ -62,6 +62,7 @@ class MarkdownPreprocessor(Preprocessor):
             replaced = re.sub(r'{{(.*?)}}', lambda m: variables[m.group(1)] , source)
         except TypeError:
             replaced = source
+        print(replaced)
         return replaced
 
     def preprocess_cell(self, cell, resources, index):
