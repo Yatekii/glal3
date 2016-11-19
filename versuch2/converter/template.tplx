@@ -60,9 +60,6 @@
   \end{titlepage}
 ((* endblock maketitle *))
 
-% New mechanism for rendering figures with captions
-
-
 % Disable unwanted blocks
 
 ((* block input_group *))
@@ -80,10 +77,8 @@
 ((* block execute_result *))
 ((* endblock execute_result *))
 
-((*- block data_latex -*))
-    KEKEKEEKEKEKEKKEKEKEKEEKEKEKEKEKEK
-((*- endblock -*))
+((* block data_html *))
+((* endblock *))
 
-((*- block data_html -*))
-    KEKEKEEKEKEKEKKEKEKEKEEKEKEKEKEKEK
-((*- endblock -*))
+((* block unknowncell *))
+((* endblock *))
