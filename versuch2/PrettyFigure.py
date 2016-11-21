@@ -3,6 +3,7 @@ from IPython.display import (
 )
 from IPython.core.pylabtools import print_figure
 from IPython.display import Image, SVG, Math
+import time
 
 class PrettyFigure:
     ip = get_ipython()
@@ -17,11 +18,7 @@ class PrettyFigure:
         data = print_figure(self.figure, format)
         return data
 
-    def _repr_png_(self):
-        png_data = self._figure_data('png')
-        return png_data
-
-    def _repr_svg_(self):
+    def _svg_(self):
         svg_data = self._figure_data('svg')
         figure_location = 'images/figures/{0}.svg'.format(self.label.split(':')[1])
         if figure_location != self.location_svg:
@@ -30,9 +27,10 @@ class PrettyFigure:
             self.location_svg = figure_location
             svg = open(figure_location, 'w')
             svg.write(svg_data)
+            svg.close()
         return svg_data
 
-    def _repr_pdf_(self):
+    def _pdf_(self):
         pdf_data = self._figure_data('pdf')
         figure_location = 'images/figures/{0}.pdf'.format(self.label.split(':')[1])
         if figure_location != self.location_pdf:
@@ -41,10 +39,11 @@ class PrettyFigure:
             self.location_pdf = figure_location
             pdf = open(figure_location, 'wb')
             pdf.write(pdf_data)
+            pdf.close()
         return pdf_data
 
     def _repr_html_(self):
-        self._repr_svg_()
+        self._svg_()
         html_data = '''
 <center>
     <object type="image/svg+xml" data="{0}">
@@ -56,7 +55,7 @@ class PrettyFigure:
         return html_data.format(self.location_svg, self.caption)
 
     def _repr_latex_(self):
-        self._repr_pdf_()
+        self._pdf_()
         latex_data = r'''\begin{figure*}
     \begin{center}\adjustimage{max size={0.9\linewidth}{0.4\paperheight}}{%s}\end{center}
     \caption{%s}
