@@ -4,9 +4,9 @@ from IPython.display import (
 from IPython.core.pylabtools import print_figure
 from IPython.display import Image, SVG, Math
 import time
+import inspect
 
 class PrettyFigure:
-    ip = get_ipython()
     def __init__(self, figure, label=None, caption='Description missing'):
         self.figure = figure
         self.caption = caption
@@ -46,9 +46,7 @@ class PrettyFigure:
         self._svg_()
         html_data = '''
 <center>
-    <object type="image/svg+xml" data="{0}">
-  Your browser does not support SVG
-    </object>
+    <img src="{0}" alt="{1}">
 </center>
 <p style="text-align:center">{1}</p>
 '''
