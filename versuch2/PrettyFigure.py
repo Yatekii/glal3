@@ -45,6 +45,7 @@ class PrettyFigure:
     def _repr_html_(self):
         self._svg_()
         html_data ='''<img src="{0}" alt="{1}" style="display: block;margin-left: auto;margin-right: auto">
+<object type="image/svg+xml" data="{0}" border="1"></object>
 <p style="text-align:center">{1}</p>
 '''
         return html_data.format(self.location_svg, self.caption)
