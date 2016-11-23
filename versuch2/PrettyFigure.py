@@ -13,6 +13,7 @@ class PrettyFigure:
         self.label = label
         self.location_svg = None
         self.location_pdf = None
+        self.location_png = None
 
     def _figure_data(self, format):
         data = print_figure(self.figure, format)
@@ -30,6 +31,18 @@ class PrettyFigure:
             svg.close()
         return svg_data
 
+    def _png_(self):
+        png_data = self._figure_data('png')
+        figure_location = 'images/figures/{0}.png'.format(self.label.split(':')[1])
+        if figure_location != self.location_png:
+            if self.location_png != None:
+                os.remove(self.location_png)
+            self.location_png = figure_location
+            png = open(figure_location, 'wb')
+            png.write(png_data)
+            png.close()
+        return png_data
+
     def _pdf_(self):
         pdf_data = self._figure_data('pdf')
         figure_location = 'images/figures/{0}.pdf'.format(self.label.split(':')[1])
@@ -43,12 +56,11 @@ class PrettyFigure:
         return pdf_data
 
     def _repr_html_(self):
-        self._svg_()
+        self._png_()
         html_data ='''<img src="{0}" alt="{1}" style="display: block;margin-left: auto;margin-right: auto">
-<object type="image/svg+xml" data="{0}" border="1"></object>
 <p style="text-align:center">{1}</p>
 '''
-        return html_data.format(self.location_svg, self.caption)
+        return html_data.format(self.location_png, self.caption)
 
     def _repr_latex_(self):
         self._pdf_()
