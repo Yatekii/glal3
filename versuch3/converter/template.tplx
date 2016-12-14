@@ -1,0 +1,84 @@
+((*- extends 'article.tplx' -*))
+
+((* block docclass *))
+\documentclass[reprint, floatfix, groupaddress, prb]{article}
+
+\usepackage{placeins}
+\usepackage{booktabs}
+\usepackage{adjustbox}
+\usepackage{stix}
+\usepackage{gensymb}
+\usepackage{float}
+\usepackage{longtable}
+
+\AtBeginDocument{
+\heavyrulewidth=.08em
+\lightrulewidth=.05em
+\cmidrulewidth=.03em
+\belowrulesep=.65ex
+\belowbottomsep=0pt
+\aboverulesep=.4ex
+\abovetopsep=0pt
+\cmidrulesep=\doublerulesep
+\cmidrulekern=.5em
+\defaultaddspace=.5em
+\usepackage{caption}
+\captionsetup{labelformat=default}
+}
+
+((* endblock docclass *))
+
+% Author and Title from metadata
+((* block maketitle *))
+
+((*- if nb.metadata["latex_metadata"]: -*))
+((*- if nb.metadata["latex_metadata"]["author"]: -*))
+    \def\author{((( nb.metadata["latex_metadata"]["author"]))) ((( nb.metadata["latex_metadata"]["email"])))}
+((*- endif *))
+((*- else -*))
+    \def\author{Noah Huesser <yatekii@yatekii.ch>}
+((*- endif *))
+
+((*- if nb.metadata["latex_metadata"]: -*))
+((*- if nb.metadata["latex_metadata"]["title"]: -*))
+    \def\title{((( nb.metadata["latex_metadata"]["title"] )))}
+((*- endif *))
+((*- else -*))
+    \def\title{((( resources.metadata.name )))}
+((*- endif *))
+
+\def\date{\today}
+
+\begin{titlepage}
+    \vspace*{\fill}
+    \begin{center}
+      {\Huge \title}\\[0.5cm]
+      {\Large \author}\\[0.4cm]
+      \date
+    \end{center}
+    \vspace*{\fill}
+  \end{titlepage}
+((* endblock maketitle *))
+
+% Disable unwanted blocks
+
+((* block input_group *))
+((* endblock input_group *))
+
+((* block stream_stdout *))
+((* endblock stream_stdout *))
+
+((* block stream_stderr *))
+((* endblock stream_stderr *))
+
+((* block traceback_line *))
+((* endblock traceback_line *))
+
+((* block execute_result *))
+((* endblock execute_result *))
+
+((* block data_html *))
+((* endblock *))
+
+((* block unknowncell *))
+((* endblock *))
