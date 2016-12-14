@@ -64,7 +64,7 @@ class PrettyFigure:
 
     def _repr_latex_(self):
         self._pdf_()
-        latex_data = r'''\begin{figure*}
+        latex_data = r'''\begin{figure*}[!htbp]
     \begin{center}\adjustimage{max size={0.9\linewidth}{0.4\paperheight}}{%s}\end{center}
     \caption{%s}
     \label{%s}

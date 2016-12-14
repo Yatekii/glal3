@@ -9,6 +9,7 @@
 \usepackage{stix}
 \usepackage{gensymb}
 \usepackage{float}
+\usepackage{array}
 \usepackage{longtable}
 
 \AtBeginDocument{

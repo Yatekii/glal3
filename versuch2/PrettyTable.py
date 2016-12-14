@@ -52,7 +52,7 @@ class PrettyTable(list):
                 elif isinstance(row, float):
                     rows.append(" & ".join(map(('{0:.' + str(self.significant_digits) + 'f}').format, row)))
                 else:
-                    rows.append(" & ".join(str(row)))
+                    rows.append(" & ".join(map(str, row)))
                 rows.append("\\\\\\addlinespace \n")
             else:
                 rows[(rows_done % self.entries_per_column) * 2] += " & " + " & ".join(map(('{0:.' + str(self.significant_digits) + 'f}').format, row))
